@@ -7,7 +7,7 @@ local createStore = import("createStore")
 local env = import("env")
 local null = import("null")
 
-return {
+redux = {
     helpers = helpers,
     utils = utils,
     applyMiddleware = applyMiddleware,
@@ -17,3 +17,5 @@ return {
     Env = env,
     Null = null,
 }
+
+return redux
