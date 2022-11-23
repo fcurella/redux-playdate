@@ -1,9 +1,7 @@
-local array = import("helpers/array")
-local assign = import("helpers/assign")
-local inspect = import("utils/inspect")
+local array = import("array")
+local assign = import("assign")
 
 return {
     Array = array,
     assign = assign,
-    inspect = inspect,
 }

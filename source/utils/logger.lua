@@ -1,4 +1,5 @@
-local inspect = import('utils/inspect')
+import "CoreLibs/object"
+
 local Logger = {}
 
 local unpack = unpack or table.unpack
@@ -9,7 +10,7 @@ local function prettyPrint(tag, ...)
     local msgs = {...}
     for i=1, #msgs do
         if type(msgs[i]) ~= 'string' then
-            msgs[i] = inspect(msgs[i])
+            msgs[i] = printTable(msgs[i])
         end
     end
     print(tag, unpack(msgs))
@@ -20,7 +21,7 @@ local function prettyPrintTrace(tag, ...)
     local msgs = {...}
     for i=1, #msgs do
         if type(msgs[i]) ~= 'string' then
-            msgs[i] = inspect(msgs[i])
+            msgs[i] = printTable(msgs[i])
         end
     end
     print(tag, unpack(msgs))

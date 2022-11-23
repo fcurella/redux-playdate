@@ -1,6 +1,7 @@
+import "CoreLibs/object"
+
 local Logger = import('utils/logger')
 local Env = import('env')
-local inspect = import('utils/inspect')
 local ActionTypes = import('utils/actionTypes')
 local isPlainObject = import('utils/isPlainObject')
 local Null = import('null')
@@ -53,7 +54,7 @@ local function getUnexpectedStateShapeWarningMessage(
             [[Expected argument to be an object with the following keys: "%s".]]
         },
             argumentName,
-            inspect(inputState, {depth = 1}),
+            printTable(inputState),
             table.concat(reducerKeys, '", "')
         )
     end
