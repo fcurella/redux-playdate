@@ -6,7 +6,7 @@ for i = 65,  90 do table.insert(charset, string.char(i)) end
 for i = 97, 122 do table.insert(charset, string.char(i)) end
 
 local function randomString(length)
-  math.randomseed(os.time())
+  math.randomseed(playdate.getSecondsSinceEpoch())
 
   if length > 0 then
     return randomString(length - 1) .. charset[math.random(1, #charset)]

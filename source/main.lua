@@ -1,5 +1,5 @@
-local helpers = import("helpers")
-local utils = import("utils")
+local helpers = import("helpers/main")
+local utils = import("utils/main")
 local applyMiddleware = import("applyMiddleware")
 local combineReducers = import("combineReducers")
 local compose = import("compose")
