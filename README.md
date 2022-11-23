@@ -1,16 +1,15 @@
-# redux-lua
-[![Build Status](https://api.travis-ci.org/pyericz/redux-lua.svg?branch=master)](https://travis-ci.org/pyericz/redux-lua)
+# redux-playdate
 
-Originally, [redux](https://redux.js.org/) is a predictable state container for JavaScript apps. From now on, all the redux features are available on your Lua projects. Try it out! :-D
+Originally, [redux](https://redux.js.org/) is a predictable state container for JavaScript apps. From now on, all the redux features are available on your Playdate projects. Try it out! :-D
 
 ## Install 
-redux-lua can be installed using [LuaRocks](http://luarocks.org/modules/pyericz/redux-lua):
+redux-playdate can be installed using [toybox](https://github.com/jm/toybox):
 ```
-$ luarocks install redux-lua
+$ toybox add fcurella/redux-playdate
 ```
 
 ## Usage
-Here is an example of profile updating. To handle redux state changes, it is recommended to use [redux-props](https://github.com/pyericz/redux-props). To get more usages, please checkout [examples](https://github.com/pyericz/redux-lua/tree/master/examples). 
+Here is an example of profile updating. To handle redux state changes, it is recommended to use [redux-props](https://github.com/pyericz/redux-props). To get more usages, please checkout [examples](https://github.com/fcurella/redux-playdate/tree/master/examples). 
 
 ### Define actions
 ```lua
@@ -53,8 +52,10 @@ return actions
 --[[
     reducers/profile.lua
 --]]
-local assign = require 'redux.helpers.assign'
-local Null = require 'redux.null'
+import("toyboxes")
+
+local assign =  redux.helpers.assign
+local Null = redux.Null
 
 local initState = {
     name = '',
@@ -94,8 +95,10 @@ end
 --[[
     reducers/index.lua
 --]]
-local combineReducers = require 'redux.combineReducers'
-local profile = require 'reducers.profile'
+import("toyboxes")
+
+local combineReducers = redux.combineReducers
+local profile = import('profile')
 
 return combineReducers({
     profile = profile
@@ -107,8 +110,10 @@ return combineReducers({
 --[[
     store.lua
 --]]
-local createStore = require 'redux.createStore'
-local reducers = require 'reducers.index'
+import("toyboxes")
+
+local createStore = redux.createStore
+local reducers = import("reducers/index")
 
 local store = createStore(reducers)
 
@@ -121,7 +126,9 @@ Here is an example about how to define a middleware.
 --[[
     middlewares/logger.lua
 --]]
-local Logger = require 'redux.utils.logger'
+import("toyboxes")
+
+local Logger = redux.utils.Logger
 
 local function logger(store)
     return function (nextDispatch)
@@ -143,8 +150,8 @@ Compose all defined middlewares to `middlewares` array.
 --[[
     middlewares/index.lua
 --]]
-local logger = require 'middlewares.logger'
-local thunk = require 'middlewares.thunk'
+local logger = import("logger")
+local thunk = import("middlewares.thunk")
 
 local middlewares = {
     thunk,
@@ -159,10 +166,12 @@ Finally, pass middlewares to `applyMiddleware`, which is provided as an enhancer
 --[[
     store.lua
 --]]
-local createStore = require 'redux.createStore'
-local reducers = require 'reducers.index'
-local applyMiddleware = require 'redux.applyMiddleware'
-local middlewares = require 'middlewares.index'
+import("toyboxes")
+
+local createStore = redux.createStore
+local reducers = import("reducers/index")
+local applyMiddleware = redux.applyMiddleware
+local middlewares = import("middlewares/index")
 
 local store = createStore(reducers, applyMiddleware(table.unpack(middlewares)))
 
@@ -173,12 +182,13 @@ return store
 --[[
     main.lua
 --]]
-local ProfileActions = require 'actions.profile'
-local inspect = require 'redux.helpers.inspect'
-local store = require 'store'
+import("CoreLibs/object")
+
+local ProfileActions = import("actions/profile")
+local store = import("store")
 
 local function callback()
-    print(inspect(store.getState()))
+    print(printTable(store.getState()))
 end
 
 -- subscribe dispatching
@@ -196,7 +206,9 @@ unsubscribe()
 ### Debug mode
 redux-lua is on `Debug` mode by default. Messages with errors and warnings will be output when `Debug` mode is on. Use following code to turn it off.
 ```lua
-local Env = require 'redux.env'
+import("toyboxes")
+
+local Env = redux.Env
 
 Env.setDebug(false)
 ```
@@ -204,9 +216,16 @@ Env.setDebug(false)
 ### Null vs. nil
 `nil` is not allowed as a reducer result. If you want any reducer to hold no value, you can return `Null` instead of `nil`.
 ```lua
-local Null = require 'redux.null'
+import("toyboxes")
+
+local Null = redux.Null
 ```
 
 
 ## License
-[MIT License](https://github.com/pyericz/redux-lua/blob/master/LICENSE)
+[MIT License](https://github.com/fcurella/redux-playdate/blob/master/LICENSE)
+
+
+## Credits
+
+This code is ported to the Playdate SDK from [redux-lua](https://github.com/pyericz/redux-lua).
