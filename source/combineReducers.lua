@@ -1,10 +1,9 @@
-local directory = (...):match("(.-)[^%.]+$")
-local Logger = require(directory..'utils.logger')
-local Env = require(directory..'env')
-local inspect = require(directory..'utils.inspect')
-local ActionTypes = require(directory..'utils.actionTypes')
-local isPlainObject = require(directory..'utils.isPlainObject')
-local Null = require(directory..'null')
+local Logger = import('utils/logger')
+local Env = import('env')
+local inspect = import('utils/inspect')
+local ActionTypes = import('utils/actionTypes')
+local isPlainObject = import('utils/isPlainObject')
+local Null = import('null')
 
 local concat = table.concat
 

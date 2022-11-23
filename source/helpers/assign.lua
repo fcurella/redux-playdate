@@ -1,4 +1,4 @@
-return function (target, ...)
+local function assign(target, ...)
     local args = {...}
     for i=1, #args do
         local tbl = args[i] or {}

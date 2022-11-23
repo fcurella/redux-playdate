@@ -1,7 +1,6 @@
-local directory = (...):match("(.-)[^%.]+$")
-local Array = require(directory .. 'helpers.array')
-local assign = require(directory .. 'helpers.assign')
-local compose = require(directory .. 'compose')
+local Array = import('helpers/array') 
+local assign = import('helpers/assign')
+local compose = import('compose')
 
 local unpack = unpack or table.unpack
 --[[

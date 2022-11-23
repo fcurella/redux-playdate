@@ -1,5 +1,4 @@
-local directory = (...):match("(.-)[^%.]+$")
-local inspect = require(directory .. 'inspect')
+local inspect = import('utils/inspect')
 local Logger = {}
 
 local unpack = unpack or table.unpack
