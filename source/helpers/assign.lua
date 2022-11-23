@@ -8,3 +8,5 @@ local function assign(target, ...)
     end
     return target
 end
+
+return assign
